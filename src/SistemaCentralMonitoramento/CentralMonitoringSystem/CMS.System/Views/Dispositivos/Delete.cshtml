@@ -1,0 +1,20 @@
+﻿@model CMS.System.Data.Models.Dispositivo
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<br/>
+<br />
+<br />
+<h3 class="text-center">Deletar cadastro do dispositivo @Model.ID_DEVICE ?</h3>
+<div>
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="ID_DEVICE" />
+        <div class="text-center">
+            <button type="submit" class="btn btn-danger">Excluir</button>
+            <a asp-controller="Dispositivos" asp-action="Index" class="btn btn-secondary">Voltar</a>
+        </div>
+
+    </form>
+</div>

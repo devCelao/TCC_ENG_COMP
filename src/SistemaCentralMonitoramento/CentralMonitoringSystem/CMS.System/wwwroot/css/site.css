@@ -1,0 +1,33 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+
+.nav-link:hover {
+    background-color: #8c8382; /* Cor de fundo ao passar o mouse */
+    color: white; /* Cor do texto ao passar o mouse */
+    font-weight: bold; /* Texto em negrito ao passar o mouse */
+}
+
+.custom-nav-collapse {
+    margin-top: 10px; /* Ajuste o valor conforme necessário */
+}

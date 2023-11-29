@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema Central de Monitoramento</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CMS.System.styles.css" asp-append-version="true" />
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" id="sidebarToggle">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/imagens/layout/main_icon_monitoring.png">
+                </a>
+                <div class="container text-center" style="font-family: 'Audiowide', sans-serif; font-size: 40px;">
+                    SISTEMA CENTRAL DE MONITORAMENTO
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Menu Lateral -->
+            <nav id="sidebar" class="col-md-2 d-md-block sidebar" >
+                <div class="position-sticky" style="top: 0;">
+                    <ul class="nav flex-column">
+                        <!-- Dashboard -->
+                        <li class="nav-item">
+                            <a class="nav-link collapsed" asp-area="" asp-controller="Home" asp-action="Index">
+                                <img src="~/imagens/layout/icon_grid.png" style="width:20px;height:20px">
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <!-- Dispositivos -->
+                        <li class="nav-item">
+                            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                                <img src="~/imagens/layout/icon_sensor.png" style="width:20px;height:20px">
+                                <i class="bi bi-menu-button-wide"></i><span>Dispositivos</span><i class="bi bi-chevron-down ms-auto"></i>
+                            </a>
+                            <ul id="components-nav" class="collapse">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Dispositivos" asp-action="Index">
+                                        <img src="~/imagens/layout/icon_cadastro.png" style="width:20px;height:20px">
+                                        <span>Cadastro</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Perfil -->
+                        <li class="nav-item">
+                            <a class="nav-link collapsed" data-bs-target="#components-nav2" data-bs-toggle="collapse" href="#">
+                                <img src="~/imagens/layout/icon_profile.png" style="width:20px;height:20px">
+                                <span>Perfil</span>
+                            </a>
+                            <ul id="components-nav2" class="collapse ">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">
+                                        <img src="~/imagens/layout/icon_login.png" style="width:20px;height:20px">
+                                        <span>Login</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Logout">
+                                        <img src="~/imagens/layout/icon_logout.png" style="width:20px;height:20px">
+                                        <span>Logout</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Registro -->
+                        <li class="nav-item">
+                            <a class="nav-link collapsed" asp-area="" asp-controller="Account" asp-action="Registro">
+                                <img src="~/imagens/layout/icon_registro.png" style="width:20px;height:20px">
+                                <span>Registro</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+
+            <!-- Conteúdo Principal -->
+            <main class="col-md-10">
+                <div style="min-height: 690px;">
+                    @RenderBody()
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer class="section-footer border-top" style="padding-top:30px">
+        <div class="container mx-auto">
+            <section class="footer-top padding-y" style="text-align:center">
+                <div class="row ">
+                    <aside class="col-md-4">
+                        <article class="mr-3">
+                            
+                        </article>
+                    </aside>
+                    <aside class="col-sm-4 col-md-3 ">
+                        
+                        <p class="float-right text-muted" style="font-family: 'Audiowide', sans-serif;">
+                            Sistema desenvolvido para o TCC do curso de Engenharia da Computação.
+                        </p>
+                    </aside>
+
+                </div>
+            </section>
+
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+
+
+
+</html>

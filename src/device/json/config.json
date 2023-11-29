@@ -1,0 +1,20 @@
+{
+  "wifi": {
+    "ssid": "",
+    "password": ""
+  },
+  "broker": {
+    "server": "",
+    "port": 1883,
+    "user": "",
+    "password": "",
+    "channel_id": "",
+    "client_id": "",
+    "write_api": "",
+    "time": 60
+  },
+  "devices": {
+    "soilSensor": 35,
+    "dhtSensor": 13
+  }
+}

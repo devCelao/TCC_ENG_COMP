@@ -1,0 +1,47 @@
+﻿@using CMS.System.Extensions;
+@model IEnumerable<CMS.System.Data.Models.Dispositivo>
+
+
+<section class="section dashboard d-flex align-items-center justify-content-center">
+    
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Identificador</th>
+                    <th scope="col">Grupo Controle</th>
+                    <th scope="col">Frequência de Atualização</th>
+                    <th scope="col">Umidade Ambiente</th>
+                    <th scope="col">Temperatura Ambiente</th>
+                    <th scope="col">Umidade do Solo</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ID_DEVICE</td>
+                        <td>@item.ID_GROUP</td>
+                        <td>@item.FREQUENCY</td>
+                        <td>@this.FormataSituacao(item.IND_ATIVO_HMD_AMB)</td>
+                        <td>@this.FormataSituacao(item.IND_ATIVO_TMP_AMB)</td>
+                        <td>@this.FormataSituacao(item.IND_ATIVO_HMD_SOL)</td>
+                        <td>
+                            <a asp-controller="Dispositivos" asp-action="Edit" asp-route-id="@item.ID_DEVICE" style="text-decoration: none;" title="Editar Cadastro">
+                                <img src="~/imagens/gerais/editar.png" width="16" height="16">
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.ID_DEVICE" style="text-decoration: none;" title="Deletar Cadastro">
+                                <img src="~/imagens/gerais/deletar.png" width="16" height="16">
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+
+

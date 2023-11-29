@@ -1,0 +1,55 @@
+﻿@model CMS.System.Data.Models.Dispositivo
+
+
+<h4 class ="text-center"> Dispositivo @Model.ID_DEVICE</h4>
+<br />
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="ID_DEVICE" />
+    <input type="hidden" asp-for="DT_CADASTRO" />
+    <input type="hidden" asp-for="DT_ALTERACAO" />
+    <input type="hidden" asp-for="COD_USUARIO_ALTERACAO" />
+    <input type="hidden" asp-for="IND_ATIVO" />
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Grupo Controle</th>
+                <th>Frequência de Atualização</th>
+                <th>Umidade Ambiente</th>
+                <th>Temperatura Ambiente</th>
+                <th>Umidade do Solo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <input asp-for="ID_GROUP" class="form-control" />
+                </td>
+                <td>
+                    <input asp-for="FREQUENCY" class="form-control" />
+                </td>
+                <td>
+                    <select asp-for="IND_ATIVO_HMD_AMB" class="form-control">
+                        <option value="1">Ligado</option>
+                        <option value="0">Desligado</option>
+                    </select>
+                </td>
+                <td>
+                    <select asp-for="IND_ATIVO_TMP_AMB" class="form-control">
+                        <option value="1">Ligado</option>
+                        <option value="0">Desligado</option>
+                    </select>
+                </td>
+                <td>
+                    <select asp-for="IND_ATIVO_HMD_SOL" class="form-control">
+                        <option value="1">Ligado</option>
+                        <option value="0">Desligado</option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a asp-controller="Dispositivos" asp-action="Index" class="btn btn-secondary">Voltar</a>
+</form>

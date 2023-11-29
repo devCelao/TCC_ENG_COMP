@@ -1,0 +1,164 @@
+﻿@using System.Globalization;
+@model CMS.System.Data.Models.MedicaoViewModel
+
+<div class="pagetitle">
+    <h1>Painel Principal</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active">Análise de Dados</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<form data-val="true" method="post" asp-controller="Home" asp-action="Index">
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="card info-card sales-card">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Referência</h5>
+                                <div>
+                                    @Html.DropDownListFor(model => model.filtro, new List<SelectListItem>
+                                    {
+                                        new SelectListItem {Text = "Hoje", Value = "2" , Selected = true},
+                                        new SelectListItem {Text = "Este Mês", Value = "1" },
+                                        new SelectListItem {Text = "Este Ano", Value = "0"  }
+                                    },
+                                    new {
+                                        @class = "form-control",
+                                        @onchange="this.form.submit()"
+                                    })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card info-card sales-card">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Dispositivo</h5>
+                                <div>
+                                    @Html.DropDownListFor(model => model.DispositivoSelecionado, new SelectList(Model.Dispositivos),
+                                    "Todos",
+                                    new {
+                                        @class = "form-control" ,
+                                        @onchange="this.form.submit()"
+                                    })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card info-card sales-card">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Grupo</h5>
+                                <div>
+                                    @Html.DropDownListFor(model => model.GrupoSelecionado, new SelectList(Model.DispositivosGrupos),
+                                    "0",
+                                    new {
+                                    @class = "form-control" ,
+                                    @onchange="this.form.submit()"
+                                    })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="medicoesChart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+    ////////////////////////////////////////////// Início Gráfico //////////////////////////////////////////////
+    document.addEventListener("DOMContentLoaded", function () {
+        var data = {
+            series: 
+            [
+                {
+                    name: 'Umidade do Ambiente',
+                    data: [@foreach (var medicao in Model.Medicoes) { @string.Concat(string.Format("{0:F1}", medicao.VAL_HMD_AMB).Replace(",", "."), ",")}]
+                }, 
+                {
+                    name: 'Temperatura do Ambiente',
+                    data: [@foreach (var medicao in Model.Medicoes) { @string.Concat(string.Format("{0:F1}", medicao.VAL_TMP_AMB).Replace(",", "."), ",")}]
+                }, 
+                {
+                    name: 'Umidade do Solo',
+                    data: [@foreach (var medicao in Model.Medicoes) { @string.Concat(string.Format("{0:F1}", medicao.VAL_HMD_SOL).Replace(",", "."), ",")}]
+                }
+            ],
+            
+            chart: {
+                type: 'area',
+                toolbar: {
+                    show: true
+                },
+                height: 400
+            },
+            colors: ['#4154f1', '#2eca6a', '#ff771d'],
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    borderRadius: 10,
+                    columnWidth: '55%',
+                    endingShape: 'rounded'
+                },
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 1,
+                colors: ['transparent']
+            },
+            grid: {
+                row: {
+                    colors: ['#fff', '#f2f2f2']
+                }
+            },
+            xaxis: {
+                tickPlacement: 'on',
+                categories: [@foreach (var cat in Model.categoria) { @string.Concat(cat.Replace(".",""),",") }],
+            },
+            yaxis: {
+                title: {
+                    text: ' Porcentagem % '
+                },
+                min: 0, // Define o valor mínimo do eixo Y
+                max: 100, // Define o valor máximo do eixo Y
+     
+            },
+            fill: {
+                opacity: 1
+            }
+        };
+            
+        console.log(data)
+
+        // Renderiza o gráfico usando ApexCharts
+        var chart = new ApexCharts(document.querySelector("#medicoesChart"), data);
+        chart.render();
+    });
+    ////////////////////////////////////////////// Fim Gráfico //////////////////////////////////////////////
+
+</script>
+
